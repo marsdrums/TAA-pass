@@ -1,0 +1,20 @@
+<jitterpass>
+	<pass name="taa" jitpos="1">
+
+		<subpass name="apply_tonemapping" file="apply_tonemapping.jxs" inputs="1">
+			<input source="COLOR" />
+		</subpass>
+
+		<subpass name="apply_taa" file="apply_taa.jxs" inputs="4">
+			<input subpass="apply_tonemapping" />
+			<input source="NORMALS" erase_color="0 0 0 1" />
+			<input source="VELOCITY" />
+			<input source="HISTORY" output="0" />
+		</subpass>
+
+		<subpass name="undo_tonemapping" file="undo_tonemapping.jxs" inputs="1">
+			<input subpass="apply_taa" />
+		</subpass>
+
+	</pass>
+</jitterpass>	
